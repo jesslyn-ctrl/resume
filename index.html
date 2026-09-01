@@ -3,414 +3,778 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jesslyn — Backend Engineer</title>
+<title>Jesslyn · Backend Engineer</title>
 <meta name="description" content="Jesslyn — Backend Engineer specializing in scalable systems, cloud infrastructure, and AI-powered automation.">
 <link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap">
 <style>
   :root{
-    --bg:#ffffff;
-    --bg-soft:#f7f8fa;
-    --text:#1a1d23;
-    --text-soft:#5b6270;
-    --border:#e6e8ec;
-    --accent:#2f5fd8;
-    --accent-soft:#eef2fd;
-    --radius:10px;
-    --maxw:800px;
+    --paper:#fafafa;
+    --surface:#ffffff;
+    --ink:#181a22;
+    --ink-soft:#5b5f70;
+    --ink-faint:#8b90a0;
+    --border:#e5e4ea;
+    --border-strong:#d2d1da;
+    --accent:#2f6fed;
+    --accent-ink:#1d4fc4;
+    --accent-soft:#eaf1ff;
+    --c-blue:#2f6fed;
+    --c-red:#ef4a63;
+    --c-yellow:#e8a324;
+    --c-green:#1c9d63;
+    --font-display:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --font-serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+    --font-mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
   }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#12141c;
+      --surface:#191c26;
+      --ink:#eceef2;
+      --ink-soft:#9ba1b0;
+      --ink-faint:#6d7385;
+      --border:#282c38;
+      --border-strong:#383e4d;
+      --accent:#6aa5ff;
+      --accent-ink:#9cc2ff;
+      --accent-soft:#17233a;
+      --c-blue:#6aa5ff;
+      --c-red:#ff7086;
+      --c-yellow:#ffc25c;
+      --c-green:#3ddc9a;
+    }
+  }
+
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{-webkit-text-size-adjust:100%;}
   body{
     margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--text);
-    background:var(--bg);
-    line-height:1.6;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-display);
+    line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
-  a{color:var(--accent);text-decoration:none;}
-  a:hover{text-decoration:underline;}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--accent-soft);color:var(--accent-ink);}
 
-  header.hero{
-    padding:72px 0 40px;
+  a{color:var(--accent-ink);}
+
+  .icon{width:14px;height:14px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;vertical-align:-2px;}
+
+  .layout{
+    max-width:1120px;
+    margin:0 auto;
+    padding:56px 28px 96px;
+  }
+  @media (max-width:860px){
+    .layout{padding:32px 20px 64px;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:48px;
+    align-items:center;
+    padding-bottom:56px;
+    margin-bottom:56px;
     border-bottom:1px solid var(--border);
   }
-  header.hero .eyebrow{
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;gap:32px;padding-bottom:36px;margin-bottom:36px;}
+  }
+
+  .id-tag{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
     color:var(--accent);
-    font-weight:600;
-    font-size:0.85rem;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    margin:0 0 10px;
+    letter-spacing:0.02em;
   }
-  header.hero h1{
-    font-size:2.6rem;
-    margin:0 0 8px;
-    letter-spacing:-0.02em;
+  h1.name{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:clamp(2.4rem,5vw,3.4rem);
+    line-height:1.02;
+    margin:10px 0 8px;
+    text-wrap:balance;
+    background:linear-gradient(100deg, var(--c-blue) 0%, var(--c-green) 38%, var(--c-yellow) 68%, var(--c-red) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
   }
-  header.hero .role{
-    font-size:1.15rem;
-    color:var(--text-soft);
-    margin:0 0 20px;
-  }
-  header.hero p.summary{
-    color:var(--text-soft);
-    max-width:640px;
+  .role{
+    color:var(--ink-soft);
+    font-size:1.05rem;
     margin:0 0 22px;
   }
-  .contact-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px 16px;
-    font-size:0.95rem;
+  .intro{
+    font-family:var(--font-serif);
+    font-style:italic;
+    font-weight:400;
+    font-size:1.2rem;
+    line-height:1.55;
+    color:var(--ink);
+    max-width:52ch;
+    margin:0 0 26px;
+    text-wrap:balance;
   }
-  .contact-row a, .contact-row span{
+  .intro em{color:var(--accent-ink);font-style:italic;}
+
+  .hero-links{display:flex;flex-wrap:wrap;gap:10px;}
+  .hero-links a{
     display:inline-flex;
     align-items:center;
-    gap:6px;
-    color:var(--text-soft);
-  }
-  .contact-row a{color:var(--text);}
-  .contact-row a:hover{color:var(--accent);}
-
-  section{padding:48px 0;border-bottom:1px solid var(--border);}
-  section:last-of-type{border-bottom:none;}
-  section h2{
-    font-size:0.85rem;
-    text-transform:uppercase;
-    letter-spacing:.1em;
-    color:var(--accent);
-    margin:0 0 28px;
-    font-weight:700;
-  }
-
-  .job{margin-bottom:32px;}
-  .job:last-child{margin-bottom:0;}
-  .job-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    flex-wrap:wrap;
-    gap:4px 16px;
-    margin-bottom:2px;
-  }
-  .job-title{font-weight:700;font-size:1.05rem;}
-  .job-date{color:var(--text-soft);font-size:0.9rem;white-space:nowrap;}
-  .job-org{color:var(--text-soft);font-style:italic;margin-bottom:10px;font-size:0.95rem;}
-  .job ul{margin:0;padding-left:20px;color:var(--text);}
-  .job ul li{margin-bottom:6px;font-size:0.96rem;}
-  .job ul li:last-child{margin-bottom:0;}
-
-  .project{
-    background:var(--bg-soft);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:20px 22px;
-    margin-bottom:16px;
-  }
-  .project:last-child{margin-bottom:0;}
-  .project h3{margin:0 0 6px;font-size:1.02rem;}
-  .project .stack{
-    display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;
-  }
-  .tag{
-    background:var(--accent-soft);
-    color:var(--accent);
+    gap:7px;
+    font-family:var(--font-mono);
     font-size:0.78rem;
-    font-weight:600;
-    padding:3px 10px;
-    border-radius:999px;
+    color:var(--ink);
+    text-decoration:none;
+    padding:7px 12px;
+    border:1px solid var(--border-strong);
+    border-radius:5px;
+    transition:border-color .18s ease, color .18s ease, transform .18s ease, background .18s ease;
   }
-  .project ul{margin:8px 0 0;padding-left:20px;}
-  .project ul li{margin-bottom:4px;font-size:0.94rem;}
+  .hero-links a:hover{
+    color:var(--accent-ink);
+    border-color:var(--accent);
+    background:var(--accent-soft);
+    transform:translateY(-1px);
+  }
 
-  .skills-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px 32px;
+  .rise{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: no-preference){
+    .rise{opacity:0;transform:translateY(12px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+    .rise.d1{animation-delay:.02s;}
+    .rise.d2{animation-delay:.11s;}
+    .rise.d3{animation-delay:.20s;}
+    .rise.d4{animation-delay:.29s;}
+    .rise.d5{animation-delay:.38s;}
   }
-  .skills-grid h3{
-    margin:0 0 8px;
-    font-size:0.9rem;
-    color:var(--text-soft);
-    font-weight:600;
-  }
-  .pill-row{display:flex;flex-wrap:wrap;gap:8px;}
-  .pill{
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  /* hero graphic */
+  .graph-panel{
+    position:relative;
     border:1px solid var(--border);
-    padding:5px 12px;
-    border-radius:999px;
-    font-size:0.85rem;
+    border-radius:10px;
+    background:
+      radial-gradient(120% 140% at 12% 15%, color-mix(in srgb, var(--c-blue) 16%, transparent), transparent 60%),
+      radial-gradient(120% 140% at 88% 25%, color-mix(in srgb, var(--c-green) 14%, transparent), transparent 60%),
+      radial-gradient(140% 160% at 55% 105%, color-mix(in srgb, var(--c-yellow) 13%, transparent), transparent 55%),
+      radial-gradient(100% 120% at 90% 100%, color-mix(in srgb, var(--c-red) 12%, transparent), transparent 55%),
+      var(--surface);
+    overflow:hidden;
+    aspect-ratio:6/5;
+  }
+  .graph-panel canvas{display:block;width:100%;height:100%;}
+  .graph-caption{
+    position:absolute;
+    left:14px;
+    bottom:12px;
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    color:var(--ink-faint);
+    background:color-mix(in srgb, var(--surface) 78%, transparent);
+    padding:3px 8px;
+    border-radius:4px;
+    pointer-events:none;
   }
 
-  .speaking-list, .edu-list{list-style:none;margin:0;padding:0;}
-  .speaking-list li, .edu-list li{
-    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    padding:10px 0;
-    border-bottom:1px dashed var(--border);
-    font-size:0.96rem;
+  /* ---------- Body grid ---------- */
+  .body-grid{
+    display:grid;
+    grid-template-columns:250px minmax(0,1fr);
+    gap:0 64px;
+    align-items:start;
   }
-  .speaking-list li:last-child, .edu-list li:last-child{border-bottom:none;}
-  .speaking-list .when, .edu-list .when{color:var(--text-soft);white-space:nowrap;}
+  @media (max-width:860px){
+    .body-grid{grid-template-columns:1fr;}
+  }
+
+  aside.sidebar{
+    position:sticky;
+    top:32px;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+  }
+  @media (max-width:860px){
+    aside.sidebar{position:static;margin-bottom:44px;gap:26px;}
+  }
+
+  .field-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .field-list li{display:flex;align-items:baseline;gap:9px;font-size:0.86rem;}
+  .field-list .k{font-family:var(--font-mono);color:var(--ink-faint);min-width:64px;flex:none;}
+  .field-list .v a, .field-list .v span{color:var(--ink);}
+  .field-list .v a{
+    text-decoration:none;
+    border-bottom:1px solid var(--border-strong);
+    transition:border-color .15s, color .15s;
+  }
+  .field-list .v a:hover{color:var(--accent-ink);border-color:var(--accent);}
+
+  .side-block h2{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    font-weight:500;
+    color:var(--ink-faint);
+    margin:0 0 12px;
+    letter-spacing:0.03em;
+  }
+  .side-block h2::after{content:":";}
+
+  .yaml-group{margin:0 0 14px;}
+  .yaml-group:last-child{margin-bottom:0;}
+  .yaml-group .key{font-family:var(--font-mono);font-size:0.78rem;display:flex;align-items:center;gap:7px;margin-bottom:5px;color:var(--dot);}
+  .yaml-group .key::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--dot);flex:none;}
+  .yaml-group.c-blue{--dot:var(--c-blue);}
+  .yaml-group.c-green{--dot:var(--c-green);}
+  .yaml-group.c-yellow{--dot:var(--c-yellow);}
+  .yaml-group.c-red{--dot:var(--c-red);}
+  .yaml-group .vals{font-size:0.86rem;color:var(--ink-soft);padding-left:14px;border-left:2px solid var(--border);line-height:1.65;transition:border-color .2s;}
+  .yaml-group:hover .vals{border-color:var(--dot);}
+
+  /* ---------- Main column ---------- */
+  main{min-width:0;}
+
+  section.block{margin-bottom:52px;}
+  section.block:last-child{margin-bottom:0;}
+  .block-head{
+    display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;
+    border-bottom:1px solid var(--border);
+  }
+  .block-head h2{font-family:var(--font-mono);font-size:0.78rem;font-weight:500;letter-spacing:0.03em;color:var(--ink-faint);margin:0;display:flex;align-items:center;gap:8px;}
+  .block-head h2::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--dot,var(--border-strong));flex:none;}
+  .block-head.c-blue h2{--dot:var(--c-blue);}
+  .block-head.c-green h2{--dot:var(--c-green);}
+  .block-head.c-yellow h2{--dot:var(--c-yellow);}
+  .block-head.c-red h2{--dot:var(--c-red);}
+
+  .reveal{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+    .reveal.in-view{opacity:1;transform:none;}
+  }
+
+  /* timeline */
+  .entry{position:relative;display:grid;grid-template-columns:88px 1fr;gap:20px;padding-bottom:8px;}
+  .entry::before{content:"";position:absolute;left:5px;top:20px;bottom:6px;width:1px;background:var(--border);}
+  .entry:last-child::before{display:none;}
+  .entry .when{font-family:var(--font-mono);font-size:0.72rem;color:var(--ink-faint);padding-top:3px;position:relative;line-height:1.5;}
+  .entry .when::before{
+    content:"";position:absolute;left:-24px;top:6px;width:9px;height:9px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--ink-faint);transition:box-shadow .2s;
+  }
+  .entry.current .when::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);}
+  .entry.current .when{color:var(--accent-ink);}
+  .tag-current{
+    display:inline-block;margin-top:6px;font-family:var(--font-mono);font-size:0.64rem;color:var(--accent-ink);
+    background:var(--accent-soft);padding:2px 6px;border-radius:3px;
+  }
+
+  .entry-toggle{
+    all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+    width:100%;cursor:pointer;padding:2px 0 14px;
+  }
+  .entry-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;}
+  .role-title{font-weight:700;font-size:1.02rem;margin:0;}
+  .role-org{color:var(--ink-soft);font-size:0.89rem;margin:2px 0 0;}
+  .entry.brief .entry-toggle{cursor:default;padding-bottom:2px;}
+
+  .chev{width:15px;height:15px;flex:none;margin-top:4px;stroke:var(--ink-faint);fill:none;stroke-width:1.8;transition:transform .3s ease;}
+  [aria-expanded="true"] .chev{transform:rotate(180deg);}
+
+  .entry-body{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease;}
+  .entry-body.collapsed{grid-template-rows:0fr;}
+  .entry-body-inner{overflow:hidden;}
+  .entry-body ul{margin:0;padding:0 0 26px 18px;}
+  .entry-body li{margin-bottom:7px;font-size:0.93rem;color:var(--ink);}
+  .entry-body li::marker{color:var(--ink-faint);}
+  .entry-body li:last-child{margin-bottom:0;}
+
+  /* projects */
+  .project{
+    border:1px solid var(--border);border-radius:8px;padding:20px 22px;background:var(--surface);
+    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .project:hover{border-color:var(--border-strong);transform:translateY(-2px);box-shadow:0 8px 24px -16px rgba(0,0,0,.35);}
+  .project h3{margin:0 0 10px;font-size:0.98rem;font-weight:700;}
+  .project ul{margin:0 0 14px;padding-left:18px;}
+  .project ul li{font-size:0.93rem;margin-bottom:6px;}
+  .stack-line{display:flex;flex-wrap:wrap;gap:10px 16px;font-family:var(--font-mono);font-size:0.74rem;}
+  .stack-line span{white-space:nowrap;color:var(--ink-soft);padding:2px 0;display:inline-flex;align-items:center;gap:6px;transition:color .15s;}
+  .stack-line span::before{content:"";width:6px;height:6px;border-radius:50%;flex:none;}
+  .stack-line span:nth-child(4n+1)::before{background:var(--c-blue);}
+  .stack-line span:nth-child(4n+2)::before{background:var(--c-green);}
+  .stack-line span:nth-child(4n+3)::before{background:var(--c-yellow);}
+  .stack-line span:nth-child(4n+4)::before{background:var(--c-red);}
+  .stack-line span:hover{color:var(--accent-ink);}
+
+  .row-list{list-style:none;margin:0;padding:0;}
+  .row-list li{
+    display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:13px 4px;
+    border-bottom:1px solid var(--border);font-size:0.92rem;border-radius:4px;transition:background .15s;
+  }
+  .row-list li:hover{background:var(--accent-soft);}
+  .row-list li:last-child{border-bottom:none;}
+  .row-list .when{font-family:var(--font-mono);font-size:0.76rem;color:var(--ink-faint);white-space:nowrap;flex:none;}
 
   footer{
-    padding:48px 0 72px;
-    text-align:center;
+    margin-top:72px;padding-top:24px;border-top:1px solid var(--border);
+    font-family:var(--font-mono);font-size:0.76rem;color:var(--ink-faint);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   }
-  footer .cta{
-    font-size:1.3rem;
-    font-weight:700;
-    margin-bottom:12px;
-  }
-  footer .contact-row{justify-content:center;margin-top:6px;}
-  footer .note{color:var(--text-soft);font-size:0.85rem;margin-top:36px;}
-
-  @media (max-width:600px){
-    header.hero{padding:48px 0 32px;}
-    header.hero h1{font-size:2rem;}
-    section{padding:36px 0;}
-  }
+  footer a{color:var(--ink-faint);}
+  footer a:hover{color:var(--accent-ink);}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">Portfolio &amp; Resume</p>
-    <h1>Jesslyn</h1>
-    <p class="role">Backend Engineer — Scalable Systems · Cloud Infrastructure · AI-Powered Automation</p>
-    <p class="summary">
-      Backend Engineer with a passion for building scalable and efficient systems. I enjoy exploring all aspects
-      of backend development, from architecture to performance optimization. Interested in Machine Learning and
-      Generative AI, always eager to learn and experiment. Enthusiastic about creating reliable and
-      well-structured solutions.
-    </p>
-    <div class="contact-row">
-      <a href="mailto:jsslnjess08@gmail.com">✉ jsslnjess08@gmail.com</a>
-      <a href="https://github.com/jesslyn-ctrl" target="_blank" rel="noopener">↗ github.com/jesslyn-ctrl</a>
-      <a id="linkedin-link" href="https://www.linkedin.com/in/jesslyn-jesslyn-5798711a7/" target="_blank" rel="noopener">↗ LinkedIn</a>
-      <span>📍 West Jakarta, Indonesia</span>
-    </div>
-  </div>
-</header>
+<div class="layout">
 
-<section id="experience">
-  <div class="wrap">
-    <h2>Work Experience</h2>
-
-    <div class="job">
-      <div class="job-head">
-        <span class="job-title">Software Engineer</span>
-        <span class="job-date">Mar 2026 – Present</span>
-      </div>
-      <div class="job-org">DoiT International, CA · Remote</div>
-      <ul>
-        <li>Led system design and architecture discussions for new services, ensuring scalability, maintainability, and alignment with business needs.</li>
-        <li>Built internal AI-powered tools and automation platforms to improve operational efficiency across Support, Finance, and Engineering.</li>
-        <li>Designed workflow automations using Zapier and n8n, integrating Zendesk, Jira, Slack, Google Workspace, and internal APIs to eliminate repetitive tasks.</li>
-        <li>Developed intelligent ticket routing systems in Zendesk, reducing manual triage and improving assignment accuracy.</li>
-        <li>Implemented Finance support automation, including skill-based routing, escalation workflows, SLA management, and reporting.</li>
-        <li>Built backend services in Go (Golang) and deployed cloud-native applications on Google Cloud Platform.</li>
-        <li>Provisioned and managed GCP infrastructure using Terraform (Cloud Run, API Gateway, Load Balancer, IAM, Artifact Registry, Cloud Build/WIF).</li>
-        <li>Created CI/CD pipelines with GitHub Actions for automated testing and deployments.</li>
-        <li>Integrated systems via APIs and event-driven architectures to streamline cross-team workflows.</li>
-        <li>Optimized Zendesk workflows through custom triggers, macros, views, and automation rules.</li>
-        <li>Leveraged AI-assisted development tools (Claude Code, Gemini, Antigravity) to accelerate engineering productivity.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head">
-        <span class="job-title">Senior Backend Engineer</span>
-        <span class="job-date">Jan 2025 – Mar 2026</span>
-      </div>
-      <div class="job-org">SG-EDTS, Jakarta</div>
-      <ul>
-        <li>Led system design and architecture discussions for new services, ensuring scalability, maintainability, and alignment with business needs.</li>
-        <li>Conducted code reviews and provided mentorship for Java Spring Boot and Golang projects, improving code quality and team productivity.</li>
-        <li>Optimized backend service performance by improving database queries, caching strategies, and API response times.</li>
-        <li>Drove best practices in microservices design, CI/CD pipelines, testing strategy, and observability.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head">
-        <span class="job-title">Backend Engineer</span>
-        <span class="job-date">Aug 2023 – Dec 2024</span>
-      </div>
-      <div class="job-org">SG-EDTS, Jakarta</div>
-      <ul>
-        <li>Proficient in Java Spring Boot and Golang, with hands-on experience building scalable backend services and APIs, including gRPC-based microservices.</li>
-        <li>Contributed to e-Budgeting (insurance) and Indomaret (retail) projects, designing and maintaining microservices architecture for high availability and performance.</li>
-        <li>Implemented Kafka for reliable real-time data exchange and decoupled service communication.</li>
-        <li>Experienced with Google Cloud Platform (Cloud SQL, GKE), Docker (multi-stage builds), and Kubernetes for cloud-native deployments.</li>
-        <li>Involved in system design, project structuring, technical documentation, and establishing scalability/maintainability best practices.</li>
-        <li>Researched and implemented GenAI solutions (Google Gemini, OpenAI GPT, Ollama) in internal projects, enhancing workflows and exploring AI-powered automation.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head">
-        <span class="job-title">Backend Engineer</span>
-        <span class="job-date">Jul 2022 – Jul 2023</span>
-      </div>
-      <div class="job-org">Gramedia, Jakarta</div>
-      <ul>
-        <li>Built and integrated backend APIs using Python (Django) and Express.js/Nuxt with PostgreSQL, MongoDB, RabbitMQ, Elastic APM, and Firebase, ensuring scalable and reliable systems.</li>
-        <li>Conducted vendor and category data mapping to ensure accurate and consistent data across systems.</li>
-        <li>Worked with AWS, Docker, Elastic Search, Git, and CI/CD pipelines for cloud-native deployments.</li>
-        <li>Led a 4-member team to deliver critical projects, including the Billing System B2B and Gramedia Affiliate System for Gramedia.com.</li>
-        <li>Engaged in system design, technical decision-making, code reviews, and adherence to best practices.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head">
-        <span class="job-title">Mobile Android &amp; Full-stack Web Developer</span>
-        <span class="job-date">Mar 2021 – Jul 2022</span>
-      </div>
-      <div class="job-org">AdIns, Jakarta</div>
-      <ul>
-        <li>Analyzed system loads and resolved production issues across multiple finance-industry clients (BCA Finance, Toyota Astra Finance, Wuling Finance, WOM Finance).</li>
-        <li>Developed and maintained Java Spring Boot backends and JSP-based web applications, handling bug fixes and production enhancements.</li>
-        <li>Built and fixed mobile applications using Java (Android Studio), integrating Firebase Crashlytics &amp; APM for monitoring.</li>
-        <li>Managed SQL Server for data operations, with deployment experience on Apache, Wildfly, and remote client servers.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head">
-        <span class="job-title">Computation &amp; NLP Assistant Lecturer</span>
-        <span class="job-date">Jun 2020 – Dec 2020</span>
-      </div>
-      <div class="job-org">Tarumanagara University, Jakarta</div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="wrap">
-    <h2>Recent Project</h2>
-    <div class="project">
-      <h3>Firebase Genkit × MCP GitHub — AI Code Review</h3>
-      <ul>
-        <li>Integrated with a self-hosted GitHub MCP Server by developing a custom tool within the Genkit flow, enabling seamless communication with the GitHub API to monitor pull requests and automatically trigger the AI review process in real time.</li>
-      </ul>
-      <div class="stack">
-        <span class="tag">Firebase Genkit</span>
-        <span class="tag">Next.js</span>
-        <span class="tag">Gemini Pro</span>
-        <span class="tag">GitHub API</span>
-        <span class="tag">TypeScript</span>
+  <section class="hero">
+    <div>
+      <p class="id-tag rise d1">// jesslyn.dev</p>
+      <h1 class="name rise d2">Jesslyn</h1>
+      <p class="role rise d2">Backend Engineer — distributed systems &amp; cloud infrastructure</p>
+      <p class="intro rise d3">
+        I build backend systems that hold up under load and stay <em>readable</em> a year later —
+        currently spending most of my time on Go services, GCP infrastructure, and the automation
+        that keeps engineering, support, and finance teams from repeating themselves.
+      </p>
+      <div class="hero-links rise d4">
+        <a href="mailto:jsslnjess08@gmail.com">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
+          jsslnjess08@gmail.com
+        </a>
+        <a href="https://github.com/jesslyn-ctrl" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          github.com/jesslyn-ctrl
+        </a>
+        <a href="https://www.linkedin.com/in/jesslyn-jesslyn-5798711a7/" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          LinkedIn
+        </a>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="skills">
-  <div class="wrap">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div>
-        <h3>Languages &amp; Frameworks</h3>
-        <div class="pill-row">
-          <span class="pill">Go (Golang)</span>
-          <span class="pill">Java / Spring Boot</span>
-          <span class="pill">Python / Django</span>
-          <span class="pill">TypeScript / Next.js</span>
-          <span class="pill">Express.js / Nuxt</span>
+    <div class="graph-panel rise d5" id="graphPanel">
+      <canvas id="graphCanvas"></canvas>
+      <span class="graph-caption">// service graph — live, drifts on its own</span>
+    </div>
+  </section>
+
+  <div class="body-grid">
+
+    <aside class="sidebar">
+      <div class="side-block">
+        <h2>contact</h2>
+        <ul class="field-list">
+          <li><span class="k">email</span><span class="v"><a href="mailto:jsslnjess08@gmail.com">jsslnjess08@gmail.com</a></span></li>
+          <li><span class="k">github</span><span class="v"><a href="https://github.com/jesslyn-ctrl" target="_blank" rel="noopener">jesslyn-ctrl</a></span></li>
+          <li><span class="k">linkedin</span><span class="v"><a href="https://www.linkedin.com/in/jesslyn-jesslyn-5798711a7/" target="_blank" rel="noopener">jesslyn-jesslyn</a></span></li>
+          <li><span class="k">based</span><span class="v"><span>West Jakarta, ID</span></span></li>
+        </ul>
+      </div>
+
+      <div class="side-block">
+        <h2>stack</h2>
+        <div class="yaml-group c-blue">
+          <span class="key">languages</span>
+          <div class="vals">Go · Java · Python · TypeScript</div>
+        </div>
+        <div class="yaml-group c-green">
+          <span class="key">cloud</span>
+          <div class="vals">GCP · Terraform · Docker · Kubernetes · AWS</div>
+        </div>
+        <div class="yaml-group c-yellow">
+          <span class="key">data</span>
+          <div class="vals">PostgreSQL · MongoDB · Kafka · RabbitMQ</div>
+        </div>
+        <div class="yaml-group c-red">
+          <span class="key">ai</span>
+          <div class="vals">Genkit · Gemini · OpenAI · Ollama</div>
         </div>
       </div>
-      <div>
-        <h3>Cloud &amp; Infrastructure</h3>
-        <div class="pill-row">
-          <span class="pill">Google Cloud Platform</span>
-          <span class="pill">Terraform</span>
-          <span class="pill">Docker</span>
-          <span class="pill">Kubernetes (GKE)</span>
-          <span class="pill">AWS</span>
-        </div>
-      </div>
-      <div>
-        <h3>Data &amp; Messaging</h3>
-        <div class="pill-row">
-          <span class="pill">PostgreSQL</span>
-          <span class="pill">MongoDB</span>
-          <span class="pill">Kafka</span>
-          <span class="pill">RabbitMQ</span>
-          <span class="pill">Cloud SQL</span>
-        </div>
-      </div>
-      <div>
-        <h3>AI / Automation</h3>
-        <div class="pill-row">
-          <span class="pill">Firebase Genkit</span>
-          <span class="pill">Google Gemini</span>
-          <span class="pill">OpenAI GPT</span>
-          <span class="pill">Ollama</span>
-          <span class="pill">Zapier / n8n</span>
-        </div>
-      </div>
-      <div>
-        <h3>DevOps &amp; Practices</h3>
-        <div class="pill-row">
-          <span class="pill">GitHub Actions</span>
-          <span class="pill">CI/CD</span>
-          <span class="pill">Microservices</span>
-          <span class="pill">gRPC</span>
-          <span class="pill">System Design</span>
-        </div>
-      </div>
-      <div>
-        <h3>Languages</h3>
-        <div class="pill-row">
-          <span class="pill">Indonesian (Native)</span>
-          <span class="pill">English (Professional)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="speaking">
-  <div class="wrap">
-    <h2>Speaking Engagements</h2>
-    <ul class="speaking-list">
-      <li><span>Google DevFest Jakarta 2023 (Tech Talk) — Firebase Speaker</span><span class="when">Nov 2023</span></li>
-      <li><span>Google DevFest Depok 2024 (Workshop) — Firebase Speaker</span><span class="when">Nov 2024</span></li>
-      <li><span>Google I/O Extended Cloud 2025 — Firebase Speaker</span><span class="when">Jul 2025</span></li>
-    </ul>
-  </div>
-</section>
+      <div class="side-block">
+        <h2>speaks</h2>
+        <div class="vals" style="padding-left:0;border-left:none;">Indonesian (native) · English (professional)</div>
+      </div>
+    </aside>
 
-<section id="education">
-  <div class="wrap">
-    <h2>Education &amp; Community</h2>
-    <ul class="edu-list">
-      <li><span>Bachelor of Computer Science, Computer and Programming — Tarumanagara University, Jakarta</span><span class="when">2018 – 2022</span></li>
-      <li><span>Open Source Contributor, Firebase Genkit Plugin</span><span class="when"></span></li>
-      <li><span>Active Member &amp; Speaker, Google Developer Group (GDG) Jakarta</span><span class="when"></span></li>
-    </ul>
-  </div>
-</section>
+    <main>
+      <section class="block reveal" id="experience">
+        <div class="block-head c-blue"><h2>experience</h2></div>
+        <div class="timeline">
 
-<footer>
-  <div class="wrap">
-    <p class="cta">Let's talk backend systems, cloud, or AI automation.</p>
-    <div class="contact-row">
-      <a href="mailto:jsslnjess08@gmail.com">✉ jsslnjess08@gmail.com</a>
-      <a href="https://github.com/jesslyn-ctrl" target="_blank" rel="noopener">↗ GitHub</a>
-      <a id="linkedin-link-footer" href="https://www.linkedin.com/in/jesslyn-jesslyn-5798711a7/" target="_blank" rel="noopener">↗ LinkedIn</a>
-    </div>
-    <p class="note">© <span id="year"></span> Jesslyn. Built with plain HTML/CSS, deployed on GitHub Pages.</p>
+          <div class="entry current">
+            <div class="when">2026.03<br>—now<span class="tag-current">current</span></div>
+            <div>
+              <button class="entry-toggle" aria-expanded="true" aria-controls="body-1">
+                <span>
+                  <p class="role-title">Software Engineer</p>
+                  <p class="role-org">DoiT International · Remote, CA</p>
+                </span>
+                <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="entry-body" id="body-1">
+                <div class="entry-body-inner">
+                  <ul>
+                    <li>Led system design and architecture discussions for new services, balancing scalability against maintainability.</li>
+                    <li>Built internal AI-powered tools and automation platforms across Support, Finance, and Engineering.</li>
+                    <li>Designed Zapier/n8n workflow automations integrating Zendesk, Jira, Slack, and Google Workspace.</li>
+                    <li>Built backend services in Go and deployed cloud-native apps on GCP; provisioned infrastructure with Terraform (Cloud Run, API Gateway, Load Balancer, IAM, Artifact Registry).</li>
+                    <li>Created CI/CD pipelines with GitHub Actions; used Claude Code, Gemini, and Antigravity to accelerate delivery.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="when">2025.01<br>2026.03</div>
+            <div>
+              <button class="entry-toggle" aria-expanded="false" aria-controls="body-2">
+                <span>
+                  <p class="role-title">Senior Backend Engineer</p>
+                  <p class="role-org">SG-EDTS · Jakarta</p>
+                </span>
+                <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="entry-body collapsed" id="body-2">
+                <div class="entry-body-inner">
+                  <ul>
+                    <li>Led system design and architecture discussions for new services.</li>
+                    <li>Reviewed and mentored on Java Spring Boot and Golang projects.</li>
+                    <li>Optimized service performance through query tuning, caching, and API response times.</li>
+                    <li>Drove best practices in microservices design, CI/CD, testing, and observability.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="when">2023.08<br>2024.12</div>
+            <div>
+              <button class="entry-toggle" aria-expanded="false" aria-controls="body-3">
+                <span>
+                  <p class="role-title">Backend Engineer</p>
+                  <p class="role-org">SG-EDTS · Jakarta</p>
+                </span>
+                <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="entry-body collapsed" id="body-3">
+                <div class="entry-body-inner">
+                  <ul>
+                    <li>Built gRPC-based microservices in Java Spring Boot and Golang for e-Budgeting (insurance) and Indomaret (retail).</li>
+                    <li>Implemented Kafka for real-time, decoupled service communication.</li>
+                    <li>Worked across GCP (Cloud SQL, GKE), Docker multi-stage builds, and Kubernetes.</li>
+                    <li>Researched and shipped GenAI features using Gemini, GPT, and Ollama.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="when">2022.07<br>2023.07</div>
+            <div>
+              <button class="entry-toggle" aria-expanded="false" aria-controls="body-4">
+                <span>
+                  <p class="role-title">Backend Engineer</p>
+                  <p class="role-org">Gramedia · Jakarta</p>
+                </span>
+                <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="entry-body collapsed" id="body-4">
+                <div class="entry-body-inner">
+                  <ul>
+                    <li>Built backend APIs in Python (Django) and Express.js/Nuxt with PostgreSQL, MongoDB, RabbitMQ, and Firebase.</li>
+                    <li>Led a 4-person team delivering the Billing System B2B and Gramedia Affiliate System.</li>
+                    <li>Owned vendor/category data mapping across systems for consistency.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="when">2021.03<br>2022.07</div>
+            <div>
+              <button class="entry-toggle" aria-expanded="false" aria-controls="body-5">
+                <span>
+                  <p class="role-title">Mobile &amp; Full-stack Developer</p>
+                  <p class="role-org">AdIns · Jakarta</p>
+                </span>
+                <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="entry-body collapsed" id="body-5">
+                <div class="entry-body-inner">
+                  <ul>
+                    <li>Resolved production issues across finance-industry clients (BCA Finance, Toyota Astra Finance, Wuling Finance, WOM Finance).</li>
+                    <li>Maintained Java Spring Boot backends and JSP web apps; built Android apps with Firebase Crashlytics/APM.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="entry brief">
+            <div class="when">2020.06<br>2020.12</div>
+            <div>
+              <div class="entry-toggle" style="padding-bottom:2px;">
+                <span>
+                  <p class="role-title">Computation &amp; NLP Assistant Lecturer</p>
+                  <p class="role-org">Tarumanagara University · Jakarta</p>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="block reveal" id="projects">
+        <div class="block-head c-green"><h2>projects</h2></div>
+        <div class="project">
+          <h3>Firebase Genkit × MCP GitHub — AI Code Review</h3>
+          <ul>
+            <li>Built a custom Genkit tool that talks to a self-hosted GitHub MCP server, watching pull requests and triggering an AI review pass in real time.</li>
+          </ul>
+          <div class="stack-line">
+            <span>Firebase Genkit</span><span>Next.js</span><span>Gemini Pro</span><span>GitHub API</span><span>TypeScript</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="block reveal" id="speaking">
+        <div class="block-head c-yellow"><h2>speaking</h2></div>
+        <ul class="row-list">
+          <li><span>Google I/O Extended Cloud 2025 — Firebase Speaker</span><span class="when">2025.07</span></li>
+          <li><span>Google DevFest Depok 2024 (Workshop) — Firebase Speaker</span><span class="when">2024.11</span></li>
+          <li><span>Google DevFest Jakarta 2023 (Tech Talk) — Firebase Speaker</span><span class="when">2023.11</span></li>
+        </ul>
+      </section>
+
+      <section class="block reveal" id="education">
+        <div class="block-head c-red"><h2>education &amp; community</h2></div>
+        <ul class="row-list">
+          <li><span>B.S. Computer Science — Tarumanagara University, Jakarta</span><span class="when">2018–2022</span></li>
+          <li><span>Open Source Contributor — Firebase Genkit Plugin</span><span class="when"></span></li>
+          <li><span>Active Member &amp; Speaker — Google Developer Group (GDG) Jakarta</span><span class="when"></span></li>
+        </ul>
+      </section>
+
+      <footer>
+        <span>© <span id="year"></span> Jesslyn</span>
+        <span><a href="mailto:jsslnjess08@gmail.com">jsslnjess08@gmail.com</a> · <a href="https://github.com/jesslyn-ctrl" target="_blank" rel="noopener">github.com/jesslyn-ctrl</a></span>
+      </footer>
+    </main>
+
   </div>
-</footer>
+</div>
 
 <script>
+(function(){
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---- accordion ---- */
+  document.querySelectorAll('.entry-toggle[aria-expanded]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var body = document.getElementById(btn.getAttribute('aria-controls'));
+      body.classList.toggle('collapsed', expanded);
+    });
+  });
+
+  /* ---- scroll reveal ---- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---- service-graph canvas ---- */
+  var panel = document.getElementById('graphPanel');
+  var canvas = document.getElementById('graphCanvas');
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0;
+  var nodes = [], edges = [], pulses = [];
+  var pointer = {x:null, y:null};
+
+  function cssVar(name){
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+  function rand(min, max){ return min + Math.random() * (max - min); }
+
+  function palette(){
+    return [cssVar('--c-blue'), cssVar('--c-green'), cssVar('--c-yellow'), cssVar('--c-red')];
+  }
+
+  function buildGraph(){
+    nodes = []; edges = []; pulses = [];
+    var count = W < 340 ? 9 : (W < 500 ? 12 : 16);
+    var pal = palette();
+    for (var i = 0; i < count; i++){
+      nodes.push({
+        x: rand(W*0.08, W*0.92),
+        y: rand(H*0.1, H*0.9),
+        vx: rand(-0.09, 0.09),
+        vy: rand(-0.07, 0.07),
+        r: rand(2.6, 4.6),
+        color: pal[i % pal.length]
+      });
+    }
+    // connect each node to its 2 nearest neighbours
+    for (var a = 0; a < nodes.length; a++){
+      var dists = [];
+      for (var b = 0; b < nodes.length; b++){
+        if (a === b) continue;
+        var dx = nodes[a].x - nodes[b].x, dy = nodes[a].y - nodes[b].y;
+        dists.push({b:b, d: dx*dx+dy*dy});
+      }
+      dists.sort(function(p,q){ return p.d - q.d; });
+      var links = Math.random() < 0.4 ? 3 : 2;
+      for (var k = 0; k < Math.min(links, dists.length); k++){
+        var pair = [a, dists[k].b].sort(function(p,q){return p-q;});
+        var key = pair[0]+'-'+pair[1];
+        if (!edges.some(function(e){ return e.key === key; })){
+          edges.push({a: pair[0], b: pair[1], key: key});
+        }
+      }
+    }
+  }
+
+  function resize(){
+    var rect = panel.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    buildGraph();
+    if (reduceMotion) drawStatic();
+  }
+
+  function drawStatic(){
+    ctx.clearRect(0,0,W,H);
+    drawEdges();
+    drawNodes();
+  }
+
+  function drawEdges(){
+    var borderColor = cssVar('--border-strong');
+    ctx.strokeStyle = borderColor;
+    ctx.lineWidth = 1;
+    edges.forEach(function(e){
+      var a = nodes[e.a], b = nodes[e.b];
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    });
+  }
+
+  function drawNodes(){
+    nodes.forEach(function(n){
+      ctx.beginPath();
+      ctx.fillStyle = n.color;
+      ctx.globalAlpha = 0.9;
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  function spawnPulse(){
+    if (!edges.length || pulses.length > 5) return;
+    var e = edges[Math.floor(Math.random()*edges.length)];
+    var forward = Math.random() < 0.5;
+    pulses.push({
+      a: forward ? e.a : e.b,
+      b: forward ? e.b : e.a,
+      t: 0,
+      speed: rand(0.006, 0.011)
+    });
+  }
+
+  var lastPulse = 0;
+  function step(ts){
+    if (!lastPulse) lastPulse = ts;
+    if (ts - lastPulse > 750){ spawnPulse(); lastPulse = ts; }
+
+    nodes.forEach(function(n){
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < W*0.05 || n.x > W*0.95) n.vx *= -1;
+      if (n.y < H*0.06 || n.y > H*0.94) n.vy *= -1;
+      if (pointer.x !== null){
+        var dx = n.x - pointer.x, dy = n.y - pointer.y;
+        var dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 70 && dist > 0.01){
+          n.x += (dx/dist) * 0.35;
+          n.y += (dy/dist) * 0.35;
+        }
+      }
+    });
+
+    pulses.forEach(function(p){ p.t += p.speed; });
+    pulses = pulses.filter(function(p){ return p.t < 1; });
+
+    ctx.clearRect(0,0,W,H);
+    drawEdges();
+
+    pulses.forEach(function(p){
+      var a = nodes[p.a], b = nodes[p.b];
+      var x = a.x + (b.x-a.x)*p.t;
+      var y = a.y + (b.y-a.y)*p.t;
+      var color = nodes[p.b].color;
+      var grad = ctx.createRadialGradient(x,y,0,x,y,10);
+      grad.addColorStop(0, color);
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x,y,10,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x,y,2.4,0,Math.PI*2);
+      ctx.fill();
+    });
+
+    drawNodes();
+    requestAnimationFrame(step);
+  }
+
+  panel.addEventListener('mousemove', function(ev){
+    var rect = panel.getBoundingClientRect();
+    pointer.x = ev.clientX - rect.left;
+    pointer.y = ev.clientY - rect.top;
+  });
+  panel.addEventListener('mouseleave', function(){ pointer.x = null; pointer.y = null; });
+
+  window.addEventListener('resize', function(){
+    clearTimeout(window.__gResize);
+    window.__gResize = setTimeout(resize, 150);
+  });
+
+  resize();
+  if (!reduceMotion) requestAnimationFrame(step);
+})();
 </script>
 
 </body>
 </html>
-
