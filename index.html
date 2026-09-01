@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jesslyn — Backend Engineer</title>
+<meta name="description" content="Jesslyn — Backend Engineer specializing in scalable systems, cloud infrastructure, and AI-powered automation.">
+<link rel="icon" href="data:,">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f7f8fa;
+    --text:#1a1d23;
+    --text-soft:#5b6270;
+    --border:#e6e8ec;
+    --accent:#2f5fd8;
+    --accent-soft:#eef2fd;
+    --radius:10px;
+    --maxw:800px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  header.hero{
+    padding:72px 0 40px;
+    border-bottom:1px solid var(--border);
+  }
+  header.hero .eyebrow{
+    color:var(--accent);
+    font-weight:600;
+    font-size:0.85rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin:0 0 10px;
+  }
+  header.hero h1{
+    font-size:2.6rem;
+    margin:0 0 8px;
+    letter-spacing:-0.02em;
+  }
+  header.hero .role{
+    font-size:1.15rem;
+    color:var(--text-soft);
+    margin:0 0 20px;
+  }
+  header.hero p.summary{
+    color:var(--text-soft);
+    max-width:640px;
+    margin:0 0 22px;
+  }
+  .contact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 16px;
+    font-size:0.95rem;
+  }
+  .contact-row a, .contact-row span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:var(--text-soft);
+  }
+  .contact-row a{color:var(--text);}
+  .contact-row a:hover{color:var(--accent);}
+
+  section{padding:48px 0;border-bottom:1px solid var(--border);}
+  section:last-of-type{border-bottom:none;}
+  section h2{
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--accent);
+    margin:0 0 28px;
+    font-weight:700;
+  }
+
+  .job{margin-bottom:32px;}
+  .job:last-child{margin-bottom:0;}
+  .job-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:4px 16px;
+    margin-bottom:2px;
+  }
+  .job-title{font-weight:700;font-size:1.05rem;}
+  .job-date{color:var(--text-soft);font-size:0.9rem;white-space:nowrap;}
+  .job-org{color:var(--text-soft);font-style:italic;margin-bottom:10px;font-size:0.95rem;}
+  .job ul{margin:0;padding-left:20px;color:var(--text);}
+  .job ul li{margin-bottom:6px;font-size:0.96rem;}
+  .job ul li:last-child{margin-bottom:0;}
+
+  .project{
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    margin-bottom:16px;
+  }
+  .project:last-child{margin-bottom:0;}
+  .project h3{margin:0 0 6px;font-size:1.02rem;}
+  .project .stack{
+    display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;
+  }
+  .tag{
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-size:0.78rem;
+    font-weight:600;
+    padding:3px 10px;
+    border-radius:999px;
+  }
+  .project ul{margin:8px 0 0;padding-left:20px;}
+  .project ul li{margin-bottom:4px;font-size:0.94rem;}
+
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px 32px;
+  }
+  .skills-grid h3{
+    margin:0 0 8px;
+    font-size:0.9rem;
+    color:var(--text-soft);
+    font-weight:600;
+  }
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{
+    border:1px solid var(--border);
+    padding:5px 12px;
+    border-radius:999px;
+    font-size:0.85rem;
+  }
+
+  .speaking-list, .edu-list{list-style:none;margin:0;padding:0;}
+  .speaking-list li, .edu-list li{
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    padding:10px 0;
+    border-bottom:1px dashed var(--border);
+    font-size:0.96rem;
+  }
+  .speaking-list li:last-child, .edu-list li:last-child{border-bottom:none;}
+  .speaking-list .when, .edu-list .when{color:var(--text-soft);white-space:nowrap;}
+
+  footer{
+    padding:48px 0 72px;
+    text-align:center;
+  }
+  footer .cta{
+    font-size:1.3rem;
+    font-weight:700;
+    margin-bottom:12px;
+  }
+  footer .contact-row{justify-content:center;margin-top:6px;}
+  footer .note{color:var(--text-soft);font-size:0.85rem;margin-top:36px;}
+
+  @media (max-width:600px){
+    header.hero{padding:48px 0 32px;}
+    header.hero h1{font-size:2rem;}
+    section{padding:36px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Portfolio &amp; Resume</p>
+    <h1>Jesslyn</h1>
+    <p class="role">Backend Engineer — Scalable Systems · Cloud Infrastructure · AI-Powered Automation</p>
+    <p class="summary">
+      Backend Engineer with a passion for building scalable and efficient systems. I enjoy exploring all aspects
+      of backend development, from architecture to performance optimization. Interested in Machine Learning and
+      Generative AI, always eager to learn and experiment. Enthusiastic about creating reliable and
+      well-structured solutions.
+    </p>
+    <div class="contact-row">
+      <a href="mailto:jsslnjess08@gmail.com">✉ jsslnjess08@gmail.com</a>
+      <a href="https://github.com/jesslyn-ctrl" target="_blank" rel="noopener">↗ github.com/jesslyn-ctrl</a>
+      <a id="linkedin-link" href="https://www.linkedin.com/in/jesslyn-jesslyn-5798711a7/" target="_blank" rel="noopener">↗ LinkedIn</a>
+      <span>📍 West Jakarta, Indonesia</span>
+    </div>
+  </div>
+</header>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Work Experience</h2>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Software Engineer</span>
+        <span class="job-date">Mar 2026 – Present</span>
+      </div>
+      <div class="job-org">DoiT International, CA · Remote</div>
+      <ul>
+        <li>Led system design and architecture discussions for new services, ensuring scalability, maintainability, and alignment with business needs.</li>
+        <li>Built internal AI-powered tools and automation platforms to improve operational efficiency across Support, Finance, and Engineering.</li>
+        <li>Designed workflow automations using Zapier and n8n, integrating Zendesk, Jira, Slack, Google Workspace, and internal APIs to eliminate repetitive tasks.</li>
+        <li>Developed intelligent ticket routing systems in Zendesk, reducing manual triage and improving assignment accuracy.</li>
+        <li>Implemented Finance support automation, including skill-based routing, escalation workflows, SLA management, and reporting.</li>
+        <li>Built backend services in Go (Golang) and deployed cloud-native applications on Google Cloud Platform.</li>
+        <li>Provisioned and managed GCP infrastructure using Terraform (Cloud Run, API Gateway, Load Balancer, IAM, Artifact Registry, Cloud Build/WIF).</li>
+        <li>Created CI/CD pipelines with GitHub Actions for automated testing and deployments.</li>
+        <li>Integrated systems via APIs and event-driven architectures to streamline cross-team workflows.</li>
+        <li>Optimized Zendesk workflows through custom triggers, macros, views, and automation rules.</li>
+        <li>Leveraged AI-assisted development tools (Claude Code, Gemini, Antigravity) to accelerate engineering productivity.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Senior Backend Engineer</span>
+        <span class="job-date">Jan 2025 – Mar 2026</span>
+      </div>
+      <div class="job-org">SG-EDTS, Jakarta</div>
+      <ul>
+        <li>Led system design and architecture discussions for new services, ensuring scalability, maintainability, and alignment with business needs.</li>
+        <li>Conducted code reviews and provided mentorship for Java Spring Boot and Golang projects, improving code quality and team productivity.</li>
+        <li>Optimized backend service performance by improving database queries, caching strategies, and API response times.</li>
+        <li>Drove best practices in microservices design, CI/CD pipelines, testing strategy, and observability.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Backend Engineer</span>
+        <span class="job-date">Aug 2023 – Dec 2024</span>
+      </div>
+      <div class="job-org">SG-EDTS, Jakarta</div>
+      <ul>
+        <li>Proficient in Java Spring Boot and Golang, with hands-on experience building scalable backend services and APIs, including gRPC-based microservices.</li>
+        <li>Contributed to e-Budgeting (insurance) and Indomaret (retail) projects, designing and maintaining microservices architecture for high availability and performance.</li>
+        <li>Implemented Kafka for reliable real-time data exchange and decoupled service communication.</li>
+        <li>Experienced with Google Cloud Platform (Cloud SQL, GKE), Docker (multi-stage builds), and Kubernetes for cloud-native deployments.</li>
+        <li>Involved in system design, project structuring, technical documentation, and establishing scalability/maintainability best practices.</li>
+        <li>Researched and implemented GenAI solutions (Google Gemini, OpenAI GPT, Ollama) in internal projects, enhancing workflows and exploring AI-powered automation.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Backend Engineer</span>
+        <span class="job-date">Jul 2022 – Jul 2023</span>
+      </div>
+      <div class="job-org">Gramedia, Jakarta</div>
+      <ul>
+        <li>Built and integrated backend APIs using Python (Django) and Express.js/Nuxt with PostgreSQL, MongoDB, RabbitMQ, Elastic APM, and Firebase, ensuring scalable and reliable systems.</li>
+        <li>Conducted vendor and category data mapping to ensure accurate and consistent data across systems.</li>
+        <li>Worked with AWS, Docker, Elastic Search, Git, and CI/CD pipelines for cloud-native deployments.</li>
+        <li>Led a 4-member team to deliver critical projects, including the Billing System B2B and Gramedia Affiliate System for Gramedia.com.</li>
+        <li>Engaged in system design, technical decision-making, code reviews, and adherence to best practices.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Mobile Android &amp; Full-stack Web Developer</span>
+        <span class="job-date">Mar 2021 – Jul 2022</span>
+      </div>
+      <div class="job-org">AdIns, Jakarta</div>
+      <ul>
+        <li>Analyzed system loads and resolved production issues across multiple finance-industry clients (BCA Finance, Toyota Astra Finance, Wuling Finance, WOM Finance).</li>
+        <li>Developed and maintained Java Spring Boot backends and JSP-based web applications, handling bug fixes and production enhancements.</li>
+        <li>Built and fixed mobile applications using Java (Android Studio), integrating Firebase Crashlytics &amp; APM for monitoring.</li>
+        <li>Managed SQL Server for data operations, with deployment experience on Apache, Wildfly, and remote client servers.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Computation &amp; NLP Assistant Lecturer</span>
+        <span class="job-date">Jun 2020 – Dec 2020</span>
+      </div>
+      <div class="job-org">Tarumanagara University, Jakarta</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Recent Project</h2>
+    <div class="project">
+      <h3>Firebase Genkit × MCP GitHub — AI Code Review</h3>
+      <ul>
+        <li>Integrated with a self-hosted GitHub MCP Server by developing a custom tool within the Genkit flow, enabling seamless communication with the GitHub API to monitor pull requests and automatically trigger the AI review process in real time.</li>
+      </ul>
+      <div class="stack">
+        <span class="tag">Firebase Genkit</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">Gemini Pro</span>
+        <span class="tag">GitHub API</span>
+        <span class="tag">TypeScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div>
+        <h3>Languages &amp; Frameworks</h3>
+        <div class="pill-row">
+          <span class="pill">Go (Golang)</span>
+          <span class="pill">Java / Spring Boot</span>
+          <span class="pill">Python / Django</span>
+          <span class="pill">TypeScript / Next.js</span>
+          <span class="pill">Express.js / Nuxt</span>
+        </div>
+      </div>
+      <div>
+        <h3>Cloud &amp; Infrastructure</h3>
+        <div class="pill-row">
+          <span class="pill">Google Cloud Platform</span>
+          <span class="pill">Terraform</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Kubernetes (GKE)</span>
+          <span class="pill">AWS</span>
+        </div>
+      </div>
+      <div>
+        <h3>Data &amp; Messaging</h3>
+        <div class="pill-row">
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">MongoDB</span>
+          <span class="pill">Kafka</span>
+          <span class="pill">RabbitMQ</span>
+          <span class="pill">Cloud SQL</span>
+        </div>
+      </div>
+      <div>
+        <h3>AI / Automation</h3>
+        <div class="pill-row">
+          <span class="pill">Firebase Genkit</span>
+          <span class="pill">Google Gemini</span>
+          <span class="pill">OpenAI GPT</span>
+          <span class="pill">Ollama</span>
+          <span class="pill">Zapier / n8n</span>
+        </div>
+      </div>
+      <div>
+        <h3>DevOps &amp; Practices</h3>
+        <div class="pill-row">
+          <span class="pill">GitHub Actions</span>
+          <span class="pill">CI/CD</span>
+          <span class="pill">Microservices</span>
+          <span class="pill">gRPC</span>
+          <span class="pill">System Design</span>
+        </div>
+      </div>
+      <div>
+        <h3>Languages</h3>
+        <div class="pill-row">
+          <span class="pill">Indonesian (Native)</span>
+          <span class="pill">English (Professional)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="speaking">
+  <div class="wrap">
+    <h2>Speaking Engagements</h2>
+    <ul class="speaking-list">
+      <li><span>Google DevFest Jakarta 2023 (Tech Talk) — Firebase Speaker</span><span class="when">Nov 2023</span></li>
+      <li><span>Google DevFest Depok 2024 (Workshop) — Firebase Speaker</span><span class="when">Nov 2024</span></li>
+      <li><span>Google I/O Extended Cloud 2025 — Firebase Speaker</span><span class="when">Jul 2025</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education &amp; Community</h2>
+    <ul class="edu-list">
+      <li><span>Bachelor of Computer Science, Computer and Programming — Tarumanagara University, Jakarta</span><span class="when">2018 – 2022</span></li>
+      <li><span>Open Source Contributor, Firebase Genkit Plugin</span><span class="when"></span></li>
+      <li><span>Active Member &amp; Speaker, Google Developer Group (GDG) Jakarta</span><span class="when"></span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="cta">Let's talk backend systems, cloud, or AI automation.</p>
+    <div class="contact-row">
+      <a href="mailto:jsslnjess08@gmail.com">✉ jsslnjess08@gmail.com</a>
+      <a href="https://github.com/jesslyn-ctrl" target="_blank" rel="noopener">↗ GitHub</a>
+      <a id="linkedin-link-footer" href="https://www.linkedin.com/in/jesslyn-jesslyn-5798711a7/" target="_blank" rel="noopener">↗ LinkedIn</a>
+    </div>
+    <p class="note">© <span id="year"></span> Jesslyn. Built with plain HTML/CSS, deployed on GitHub Pages.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
+
