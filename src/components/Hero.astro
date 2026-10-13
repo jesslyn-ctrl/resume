@@ -1,0 +1,101 @@
+---
+import { profile, contactLinks } from '../data/profile';
+import { url } from '../lib/url';
+---
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Portfolio &amp; Resume</p>
+    <h1>{profile.name}</h1>
+    <p class="role">{profile.role}</p>
+    <p class="summary">{profile.summary}</p>
+    <div class="actions">
+      <a class="button primary" href={url('/projects/')}>View projects</a>
+      <a class="button" href={`mailto:${profile.email}`}>Get in touch</a>
+    </div>
+    <ul class="contact">
+      {
+        contactLinks.map((link) => (
+          <li>
+            <a href={link.href} {...link.external ? { target: '_blank', rel: 'noopener' } : {}}>
+              {link.label}
+              {link.external && <span aria-hidden="true"> ↗</span>}
+            </a>
+          </li>
+        ))
+      }
+      <li>{profile.location}</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 88px 0 64px;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    letter-spacing: -0.03em;
+    margin: 0 0 10px;
+  }
+  .role {
+    font-size: 1.15rem;
+    color: var(--text-soft);
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  .summary {
+    max-width: 640px;
+    margin: 0 0 28px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .button {
+    display: inline-block;
+    padding: 9px 18px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+  }
+  .button:hover {
+    text-decoration: none;
+    border-color: var(--text-soft);
+    transform: translateY(-1px);
+  }
+  .button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.92rem;
+    color: var(--text-soft);
+  }
+  .contact a {
+    color: var(--text-soft);
+  }
+  .contact a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding: 56px 0 44px;
+    }
+  }
+</style>

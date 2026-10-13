@@ -1,0 +1,46 @@
+---
+interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<section id={id} class="section reveal" aria-labelledby={`${id}-title`}>
+  <div class="wrap">
+    <div class="head">
+      <h2 id={`${id}-title`} class="eyebrow">{title}</h2>
+      <slot name="action" />
+    </div>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 56px 0;
+    border-top: 1px solid var(--border);
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .head h2 {
+    margin: 0;
+  }
+  .head :global(a) {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .section {
+      padding: 40px 0;
+    }
+  }
+</style>

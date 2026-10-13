@@ -1,0 +1,72 @@
+---
+import type { Job } from '../data/experience';
+
+interface Props {
+  job: Job;
+}
+
+const { job } = Astro.props;
+---
+
+<li class="item">
+  <div class="head">
+    <h3>{job.title}</h3>
+    <span class="period">{job.period}</span>
+  </div>
+  <p class="org">{job.org}</p>
+  {job.points.length > 0 && <ul>{job.points.map((point) => <li>{point}</li>)}</ul>}
+</li>
+
+<style>
+  .item {
+    position: relative;
+    padding: 0 0 36px 28px;
+    border-left: 1px solid var(--border);
+  }
+  .item:last-child {
+    padding-bottom: 0;
+  }
+  .item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 7px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  .period {
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+  .org {
+    margin: 2px 0 12px;
+    color: var(--text-soft);
+    font-size: 0.95rem;
+  }
+  ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  ul li {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+  }
+  ul li:last-child {
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import type { ListEntry } from '../data/speaking';
+
+interface Props {
+  entries: ListEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<ul class="list">
+  {
+    entries.map((entry) => (
+      <li>
+        <span>{entry.text}</span>
+        {entry.when && <span class="when">{entry.when}</span>}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.96rem;
+  }
+  li:first-child {
+    padding-top: 0;
+  }
+  li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .when {
+    color: var(--text-soft);
+    white-space: nowrap;
+  }
+</style>

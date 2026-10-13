@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Timeline from '../components/Timeline.astro';
+import SkillsGrid from '../components/SkillsGrid.astro';
+import SimpleList from '../components/SimpleList.astro';
+import { profile } from '../data/profile';
+import { experience } from '../data/experience';
+import { skills } from '../data/skills';
+import { speaking } from '../data/speaking';
+import { education } from '../data/education';
+import { getProjects } from '../lib/projects';
+import { url } from '../lib/url';
+
+const featured = (await getProjects()).filter((project) => project.data.featured);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.title,
+  description: profile.description,
+  url: new URL(url('/'), Astro.site).href,
+  email: `mailto:${profile.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'West Jakarta', addressCountry: 'ID' },
+  sameAs: [profile.github, profile.linkedin],
+};
+---
+
+<BaseLayout jsonLd={jsonLd}>
+  <Hero />
+
+  <Section id="projects" title="Featured Projects">
+    <a slot="action" href={url('/projects/')}>All projects →</a>
+    <ul class="project-grid">
+      {
+        featured.map((project) => (
+          <li>
+            <ProjectCard project={project} />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section id="experience" title="Work Experience">
+    <Timeline jobs={experience} />
+  </Section>
+
+  <Section id="skills" title="Skills">
+    <SkillsGrid groups={skills} />
+  </Section>
+
+  <Section id="speaking" title="Speaking Engagements">
+    <SimpleList entries={speaking} />
+  </Section>
+
+  <Section id="education" title="Education & Community">
+    <SimpleList entries={education} />
+  </Section>
+</BaseLayout>

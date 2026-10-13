@@ -1,0 +1,22 @@
+---
+import TimelineItem from './TimelineItem.astro';
+import type { Job } from '../data/experience';
+
+interface Props {
+  jobs: Job[];
+}
+
+const { jobs } = Astro.props;
+---
+
+<ol class="timeline">
+  {jobs.map((job) => <TimelineItem job={job} />)}
+</ol>
+
+<style>
+  .timeline {
+    margin: 0 0 0 4px;
+    padding: 0;
+    list-style: none;
+  }
+</style>

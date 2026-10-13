@@ -1,0 +1,111 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { profile } from '../data/profile';
+import { url } from '../lib/url';
+
+const onProjects = Astro.url.pathname.startsWith(url('/projects/'));
+
+const links = [
+  { label: 'Projects', href: url('/projects/'), section: 'projects' },
+  { label: 'Experience', href: url('/#experience'), section: 'experience' },
+  { label: 'Skills', href: url('/#skills'), section: 'skills' },
+  { label: 'Speaking', href: url('/#speaking'), section: 'speaking' },
+  { label: 'Contact', href: url('/#contact'), section: 'contact' },
+];
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href={url('/')}>{profile.name}</a>
+    <nav aria-label="Main">
+      <ul>
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                data-section={link.section}
+                aria-current={link.section === 'projects' && onProjects ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-height: var(--header-h);
+  }
+  .brand {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  nav {
+    margin-left: auto;
+    min-width: 0;
+  }
+  ul {
+    display: flex;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  nav a {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    white-space: nowrap;
+  }
+  nav a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav a[aria-current] {
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  @media (max-width: 640px) {
+    .bar {
+      flex-wrap: wrap;
+      gap: 0 12px;
+      padding-top: 8px;
+    }
+    .brand {
+      margin-right: auto;
+    }
+    nav {
+      order: 3;
+      width: 100%;
+      margin: 4px -10px 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav a {
+      font-size: 0.82rem;
+      padding: 6px 7px;
+    }
+  }
+</style>
