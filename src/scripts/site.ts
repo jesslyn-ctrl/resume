@@ -1,3 +1,5 @@
+import './easter-egg';
+
 type Theme = 'light' | 'dark';
 
 function currentTheme(): Theme {
