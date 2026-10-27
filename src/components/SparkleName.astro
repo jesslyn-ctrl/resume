@@ -1,0 +1,115 @@
+---
+/**
+ * A name that sparkles on hover: a pointer cursor and four twinkling stars.
+ * Also the tap target for the Mochi easter egg (see scripts/easter-egg.ts).
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const STAR = 'M12 0C12.6 6.5 17.5 11.4 24 12 17.5 12.6 12.6 17.5 12 24 11.4 17.5 6.5 12.6 0 12 6.5 11.4 11.4 6.5 12 0Z';
+---
+
+<span class="sparkle-name">
+  {text}
+  <span class="sparkles" aria-hidden="true">
+    {
+      [1, 2, 3, 4].map((n) => (
+        <svg class={`star s${n}`} viewBox="0 0 24 24" focusable="false">
+          <path d={STAR} />
+        </svg>
+      ))
+    }
+  </span>
+</span>
+
+<style>
+  .sparkle-name {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    fill: currentColor;
+    opacity: 0;
+    transform: scale(0);
+  }
+  .s1 {
+    top: -0.28em;
+    left: -0.32em;
+    width: 0.42em;
+    height: 0.42em;
+    color: #f2b33d;
+  }
+  .s2 {
+    top: -0.36em;
+    right: -0.42em;
+    width: 0.55em;
+    height: 0.55em;
+    color: var(--accent);
+  }
+  .s3 {
+    bottom: -0.16em;
+    right: -0.24em;
+    width: 0.32em;
+    height: 0.32em;
+    color: #ff8fb1;
+  }
+  .s4 {
+    bottom: -0.3em;
+    left: 38%;
+    width: 0.3em;
+    height: 0.3em;
+    color: #f2b33d;
+  }
+
+  .sparkle-name:hover .star,
+  :global(:focus-visible) > .sparkle-name .star {
+    animation: twinkle 1.4s ease-in-out infinite;
+  }
+  .sparkle-name:hover .s2,
+  :global(:focus-visible) > .sparkle-name .s2 {
+    animation-delay: 0.35s;
+  }
+  .sparkle-name:hover .s3,
+  :global(:focus-visible) > .sparkle-name .s3 {
+    animation-delay: 0.7s;
+  }
+  .sparkle-name:hover .s4,
+  :global(:focus-visible) > .sparkle-name .s4 {
+    animation-delay: 1.05s;
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1) rotate(90deg);
+    }
+  }
+
+  /* No twinkling for reduced motion: the stars just appear. */
+  @media (prefers-reduced-motion: reduce) {
+    .sparkle-name:hover .star,
+    :global(:focus-visible) > .sparkle-name .star {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

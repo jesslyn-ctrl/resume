@@ -1,4 +1,5 @@
 ---
+import SparkleName from './SparkleName.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { profile } from '../data/profile';
 import { url } from '../lib/url';
@@ -16,7 +17,7 @@ const links = [
 
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand" href={url('/')}>{profile.name}</a>
+    <a class="brand" href={url('/')}><SparkleName text={profile.name} /></a>
     <nav aria-label="Main">
       <ul>
         {
