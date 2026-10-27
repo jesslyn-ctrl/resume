@@ -1,0 +1,52 @@
+---
+import type { SkillGroup } from '../data/skills';
+
+interface Props {
+  groups: SkillGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+<div class="grid">
+  {
+    groups.map((group) => (
+      <div>
+        <h3>{group.name}</h3>
+        <ul>
+          {group.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 24px 32px;
+  }
+  h3 {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-soft);
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+  }
+</style>

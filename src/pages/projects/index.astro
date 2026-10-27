@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import TagFilter from '../../components/TagFilter.astro';
+import { getProjects } from '../../lib/projects';
+
+const projects = await getProjects();
+const tags = [...new Set(projects.flatMap((project) => project.data.stack))].sort((a, b) => a.localeCompare(b));
+---
+
+<BaseLayout
+  title="Projects"
+  description="Case studies from Jesslyn's work: backend systems, full-stack products, and AI-powered tools."
+>
+  <div class="wrap page">
+    <p class="eyebrow">Projects</p>
+    <h1>Things I've built</h1>
+    <p class="lede">
+      Personal projects are written up in full. Work done for employers and clients is described at a high level only,
+      with internal details withheld.
+    </p>
+
+    <TagFilter tags={tags} />
+
+    <ul class="project-grid" data-project-list>
+      {
+        projects.map((project) => (
+          <li data-tags={JSON.stringify(project.data.stack)}>
+            <ProjectCard project={project} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-block: 64px 80px;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  .lede {
+    max-width: 620px;
+    color: var(--text-soft);
+    margin: 0 0 32px;
+  }
+  .project-grid > li[hidden] {
+    display: none;
+  }
+</style>

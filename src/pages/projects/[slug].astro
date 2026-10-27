@@ -1,0 +1,118 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/projects';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { title, summary, role, period, stack, visibility, repo } = project.data;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={title} description={summary}>
+  <article class="wrap page">
+    <a class="back" href={url('/projects/')}>← All projects</a>
+    <h1>{title}</h1>
+    <p class="summary">{summary}</p>
+
+    <dl class="facts">
+      <div>
+        <dt>Role</dt>
+        <dd>{role}</dd>
+      </div>
+      <div>
+        <dt>Period</dt>
+        <dd>{period}</dd>
+      </div>
+      {
+        repo && (
+          <div>
+            <dt>Source</dt>
+            <dd>
+              <a href={repo} target="_blank" rel="noopener">
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+
+    <ul class="tag-row">
+      {stack.map((tag) => <li class="tag">{tag}</li>)}
+    </ul>
+
+    {
+      visibility === 'limited' && (
+        <p class="notice">
+          This is a high-level summary. Architecture, workflows, and implementation details are confidential and
+          withheld.
+        </p>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-block: 48px 80px;
+  }
+  .back {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+  .summary {
+    font-size: 1.12rem;
+    color: var(--text-soft);
+    margin: 0 0 28px;
+    max-width: 680px;
+  }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 48px;
+    margin: 0 0 20px;
+    padding: 18px 0;
+    border-block: 1px solid var(--border);
+  }
+  dt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+  dd {
+    margin: 2px 0 0;
+    font-weight: 600;
+  }
+  .notice {
+    margin: 28px 0 0;
+    padding: 14px 16px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    color: var(--text-soft);
+  }
+  .prose {
+    max-width: 700px;
+  }
+</style>

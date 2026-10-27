@@ -1,0 +1,72 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { profile } from '../data/profile';
+import { url } from '../lib/url';
+import '../styles/global.css';
+
+interface Props {
+  /** Page name; omit on the home page. */
+  title?: string;
+  description?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description = profile.description, jsonLd } = Astro.props;
+const fullTitle = title ? `${title} · ${profile.name}` : `${profile.name} — ${profile.title}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <script is:inline>
+      // Apply the saved theme before first paint, and again after each page transition.
+      (function () {
+        function apply() {
+          var root = document.documentElement;
+          root.classList.add('js');
+          var theme = window.__theme;
+          try {
+            theme = localStorage.getItem('theme') || theme;
+          } catch (e) {}
+          if (theme === 'light' || theme === 'dark') root.dataset.theme = theme;
+        }
+        apply();
+        document.addEventListener('astro:after-swap', apply);
+      })();
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>
