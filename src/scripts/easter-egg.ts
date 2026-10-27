@@ -91,7 +91,9 @@ async function openEgg(): Promise<void> {
 
 function onClick(event: MouseEvent): void {
   // The name in the header, or the big name on the home page.
-  const target = (event.target as HTMLElement).closest<HTMLElement>('.site-header .brand, .hero h1');
+  // Events can target the document or a text node, which have no closest().
+  if (!(event.target instanceof Element)) return;
+  const target = event.target.closest<HTMLElement>('.site-header .brand, .hero h1');
   if (!target) return;
 
   const now = performance.now();
@@ -111,8 +113,8 @@ function onClick(event: MouseEvent): void {
 }
 
 function onKey(event: KeyboardEvent): void {
-  const target = event.target as HTMLElement;
-  if (target.closest('input, textarea, select, [contenteditable="true"]')) return;
+  const target = event.target instanceof Element ? event.target : null;
+  if (target?.closest('input, textarea, select, [contenteditable="true"]')) return;
   if (event.key.length !== 1 || event.metaKey || event.ctrlKey || event.altKey) return;
   typed = (typed + event.key.toLowerCase()).slice(-SECRET_WORD.length);
   if (typed === SECRET_WORD) {
